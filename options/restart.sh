@@ -62,86 +62,86 @@ echo -e "======================================" | lolcat
 sleep 1
 clear
 case $Restart in
-                1)
-                clear
-                #systemctl restart ws-dropbear.service >/dev/null 2>&1
-                systemctl restart ws-stunnel.service >/dev/null 2>&1
-                systemctl restart xray.service >/dev/null 2>&1
-                /etc/init.d/ssh restart
-                /etc/init.d/dropbear restart
-                /etc/init.d/stunnel5 restart
-                /etc/init.d/fail2ban restart
-                /etc/init.d/cron restart
-                /etc/init.d/nginx restart
-                screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000
-                screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000
-                screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000
-                systemctl restart rc-local.service
-                echo -e ""
-                echo -e "======================================"
-                echo -e ""
-                echo -e "          Service/s Restarted         "
-                echo -e ""
-                echo -e "======================================"
-                ;;
-                2)
-                clear
-                /etc/init.d/ssh restart
-                echo -e ""
-                echo -e "======================================"
-                echo -e ""
-                echo -e "         SSH Service Restarted        "
-                echo -e ""
-                echo -e "======================================"
-                ;;
-                3)
-                clear
-                /etc/init.d/dropbear restart
-                echo -e ""
-                echo -e "======================================"
-                echo -e ""
-                echo -e "       Dropbear Service Restarted     "
-                echo -e ""
-                echo -e "======================================"
-                ;;
-                4)
-                clear
-                /etc/init.d/stunnel5 restart
-                echo -e ""
-                echo -e "======================================"
-                echo -e ""
-                echo -e "        Stunnel5 Service Restarted    "
-                echo -e ""
-                echo -e "======================================"
-                ;;
-                5)
-                clear
-                /etc/init.d/nginx restart
-                echo -e ""
-                echo -e "======================================"
-                echo -e ""
-                echo -e "         Nginx Service Restarted      "
-                echo -e ""
-                echo -e "======================================"
-                ;;
-                6)
-                clear
-                screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
-                screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
-                screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
-                systemctl restart rc-local.service >/dev/null 2>&1
-                echo -e ""
-                echo -e "======================================"
-                echo -e ""
-                echo -e "    Badvpn  Badvpn Service Restarted  "
-                echo -e ""
-                echo -e "======================================"
-                ;;
-                x)
-                clear
-                menu
-                ;;
-        esac
+1)
+        clear
+        #systemctl restart ws-dropbear.service >/dev/null 2>&1
+        systemctl restart ws-stunnel.service >/dev/null 2>&1
+        systemctl restart xray.service >/dev/null 2>&1
+        /etc/init.d/ssh restart
+        /etc/init.d/dropbear restart
+        /etc/init.d/stunnel5 restart
+        /etc/init.d/fail2ban restart
+        /etc/init.d/cron restart
+        /etc/init.d/nginx restart
+        screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000
+        screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000
+        screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000
+        systemctl restart rc-local.service
+        echo -e ""
+        echo -e "======================================"
+        echo -e ""
+        echo -e "          Service/s Restarted         "
+        echo -e ""
+        echo -e "======================================"
+        ;;
+2)
+        clear
+        /etc/init.d/ssh restart
+        echo -e ""
+        echo -e "======================================"
+        echo -e ""
+        echo -e "         SSH Service Restarted        "
+        echo -e ""
+        echo -e "======================================"
+        ;;
+3)
+        clear
+        /etc/init.d/dropbear restart
+        echo -e ""
+        echo -e "======================================"
+        echo -e ""
+        echo -e "       Dropbear Service Restarted     "
+        echo -e ""
+        echo -e "======================================"
+        ;;
+4)
+        clear
+        /etc/init.d/stunnel5 restart
+        echo -e ""
+        echo -e "======================================"
+        echo -e ""
+        echo -e "        Stunnel5 Service Restarted    "
+        echo -e ""
+        echo -e "======================================"
+        ;;
+5)
+        clear
+        /etc/init.d/nginx restart
+        echo -e ""
+        echo -e "======================================"
+        echo -e ""
+        echo -e "         Nginx Service Restarted      "
+        echo -e ""
+        echo -e "======================================"
+        ;;
+6)
+        clear
+        screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
+        screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
+        screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
+        systemctl restart rc-local.service >/dev/null 2>&1
+        echo -e ""
+        echo -e "======================================"
+        echo -e ""
+        echo -e "    Badvpn  Badvpn Service Restarted  "
+        echo -e ""
+        echo -e "======================================"
+        ;;
+x)
+        clear
+        menu
+        ;;
+esac
 read -n 1 -s -r -p "Press any key to back on menu"
 
 menu

@@ -8,8 +8,7 @@ echo -e "> Support OS
   For Debian 9 & Debian 10 & Debian 11 " | lolcat
 echo ""
 echo -e "  Contact Owner AutoScript
-> WA: +6281315010096
-> TELEGRAM: t.me/MasAnsor" | lolcat
+> WA: +6283129559171" | lolcat
 echo ""
 echo -e "Thanks for your Order" | lolcat
 echo ""

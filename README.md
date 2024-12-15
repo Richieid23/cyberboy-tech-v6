@@ -1,8 +1,8 @@
 ### INSTAL
-<pre><code>wget -O setup.sh https://raw.githubusercontent.com/king-vpn/v6/main/setup.sh && chmod +x setup.sh && ./setup.sh</code></pre>
+<pre><code>wget -O setup.sh https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/setup.sh && chmod +x setup.sh && ./setup.sh</code></pre>
 
 ### UPDATE
-<pre><code>wget -O update.sh https://raw.githubusercontent.com/king-vpn/v6/main/options/update.sh && chmod +x update.sh && ./update.sh</code></pre>
+<pre><code>wget -O update.sh https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/update.sh && chmod +x update.sh && ./update.sh</code></pre>
 
 ## ⏩ AUTOSCRIPT WEBSOCKET MULTIPORT 443 DETAILS ⏪
 ### Support Vmess Multipath <br> 

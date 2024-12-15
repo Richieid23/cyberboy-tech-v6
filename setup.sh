@@ -15,8 +15,8 @@ apt install ruby -y
 gem install lolcat -y
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
-                echo -e "${EROR} Please Run This Script As Root User !"
-                exit 1
+    echo -e "${EROR} Please Run This Script As Root User !"
+    exit 1
 fi
 clear
 # // Exporting Language to UTF-8
@@ -62,15 +62,15 @@ BURIQ () {
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
-    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
-    d1=(`date -d "$exp" +%s`)
-    d2=(`date -d "$biji" +%s`)
-    exp2=$(( (d1 - d2) / 86400 ))
-    if [[ "$exp2" -le "0" ]]; then
-    echo $user > /etc/.$user.ini
-    else
-    rm -f  /etc/.$user.ini > /dev/null 2>&1
-    fi
+        exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+        d1=(`date -d "$exp" +%s`)
+        d2=(`date -d "$biji" +%s`)
+        exp2=$(( (d1 - d2) / 86400 ))
+        if [[ "$exp2" -le "0" ]]; then
+            echo $user > /etc/.$user.ini
+        else
+            rm -f  /etc/.$user.ini > /dev/null 2>&1
+        fi
     done
     rm -f  /root/tmp
 }
@@ -81,23 +81,23 @@ echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
 Bloman () {
-if [ -f "/etc/.$Name.ini" ]; then
-CekTwo=$(cat /etc/.$Name.ini)
-    if [ "$CekOne" = "$CekTwo" ]; then
-        res="Expired"
+    if [ -f "/etc/.$Name.ini" ]; then
+        CekTwo=$(cat /etc/.$Name.ini)
+        if [ "$CekOne" = "$CekTwo" ]; then
+            res="Expired"
+        fi
+    else
+        res="Permission Accepted..."
     fi
-else
-res="Permission Accepted..."
-fi
 }
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
     IZIN=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
-    Bloman
+        Bloman
     else
-    res="Permission Denied!"
+        res="Permission Denied!"
     fi
     BURIQ
 }
@@ -105,19 +105,19 @@ PERMISSION () {
 clear
 #System version number
 if [ "${EUID}" -ne 0 ]; then
-                echo "You need to run this script as root"
-                exit 1
+    echo "You need to run this script as root"
+    exit 1
 fi
 if [ "$(systemd-detect-virt)" == "openvz" ]; then
-                echo "OpenVZ is not supported"
-                exit 1
+    echo "OpenVZ is not supported"
+    exit 1
 fi
 
 localip=$(hostname -I | cut -d\  -f1)
 hst=( `hostname` )
 dart=$(cat /etc/hosts | grep -w `hostname` | awk '{print $2}')
 if [[ "$hst" != "$dart" ]]; then
-echo "$localip $(hostname)" >> /etc/hosts
+    echo "$localip $(hostname)" >> /etc/hosts
 fi
 mkdir -p /etc/xray
 
@@ -131,44 +131,43 @@ echo -ne "[ ${green}INFO${NC} ] Check your permission : "
 
 PERMISSION
 if [ -f /home/needupdate ]; then
-red "Your script need to update first !"
-exit 0
+    red "Your script need to update first !"
+    exit 0
 elif [ "$res" = "Permission Accepted..." ]; then
-green "Permission Accepted!"
+    green "Permission Accepted!"
 else
-red "Permission Denied!
-Please Buy AutoScript Premium
-Whatsapp : 08981874211
-Telegram : t.me/AimanVpnExpress"
-rm setup.sh > /dev/null 2>&1
-sleep 10
-exit 0
+    red "Permission Denied!
+    Please Buy AutoScript Premium
+    Whatsapp : 083129559171"
+    rm setup.sh > /dev/null 2>&1
+    sleep 10
+    exit 0
 fi
 sleep 3
 
 # // cek old script
 if [[ -r /etc/xray/domain ]]; then
-clear
-echo -e "${INFO} Having Script Detected !"
-echo -e "${INFO} If You Replacing Script, All Client Data On This VPS Will Be Cleanup !"
-read -p "Are You Sure Wanna Replace Script ? (Y/N) " josdong
-if [[ $josdong == "Y" ]]; then
-clear
-echo -e "${INFO} Starting Replacing Script !"
-elif [[ $josdong == "y" ]]; then
-clear
-echo -e "${INFO} Starting Replacing Script !"
-rm -rf /var/lib/scrz-prem 
-elif [[ $josdong == "N" ]]; then
-echo -e "${INFO} Action Canceled !"
-exit 1
-elif [[ $josdong == "n" ]]; then
-echo -e "${INFO} Action Canceled !"
-exit 1
-else
-echo -e "${EROR} Your Input Is Wrong !"
-exit 1
-fi
+    clear
+    echo -e "${INFO} Having Script Detected !"
+    echo -e "${INFO} If You Replacing Script, All Client Data On This VPS Will Be Cleanup !"
+    read -p "Are You Sure Wanna Replace Script ? (Y/N) " josdong
+    if [[ $josdong == "Y" ]]; then
+        clear
+        echo -e "${INFO} Starting Replacing Script !"
+    elif [[ $josdong == "y" ]]; then
+        clear
+        echo -e "${INFO} Starting Replacing Script !"
+        rm -rf /var/lib/scrz-prem 
+    elif [[ $josdong == "N" ]]; then
+        echo -e "${INFO} Action Canceled !"
+        exit 1
+    elif [[ $josdong == "n" ]]; then
+        echo -e "${INFO} Action Canceled !"
+        exit 1
+    else
+        echo -e "${EROR} Your Input Is Wrong !"
+        exit 1
+    fi
 clear
 fi
 echo -e "${GREEN}Starting Installation............${NC}"
@@ -213,295 +212,291 @@ echo ""
 read -p "$( echo -e "${GREEN}Input Your Choose ? ${NC}(${YELLOW}1/2${NC})${NC} " )" choose_domain
 
 if [[ $choose_domain == "2" ]]; then # // Using Automatic Domain
-# // Folder Sistem Yang Tidak Boleh Di Hapus
-mkdir -p /usr/bin
-# // Remove File & Directory
-rm -fr /usr/local/bin/xray
-rm -fr /usr/local/bin/stunnel
-rm -fr /usr/local/bin/stunnel5
-rm -fr /etc/nginx
-rm -fr /var/lib/scrz-prem/
-rm -fr /usr/bin/xray
-rm -fr /var/www/html
-rm -fr /etc/xray
-rm -fr /usr/local/etc/xray
-# // Making Directory 
-mkdir -p /etc/nginx
-mkdir -p /var/lib/scrz-prem/
-mkdir -p /usr/bin/xray
-mkdir -p /etc/xray
-mkdir -p /usr/local/etc/xray
-mkdir -p /var/www/html
+    # // Folder Sistem Yang Tidak Boleh Di Hapus
+    mkdir -p /usr/bin
+    # // Remove File & Directory
+    rm -fr /usr/local/bin/xray
+    rm -fr /usr/local/bin/stunnel
+    rm -fr /usr/local/bin/stunnel5
+    rm -fr /etc/nginx
+    rm -fr /var/lib/scrz-prem/
+    rm -fr /usr/bin/xray
+    rm -fr /var/www/html
+    rm -fr /etc/xray
+    rm -fr /usr/local/etc/xray
+    # // Making Directory 
+    mkdir -p /etc/nginx
+    mkdir -p /var/lib/scrz-prem/
+    mkdir -p /usr/bin/xray
+    mkdir -p /etc/xray
+    mkdir -p /usr/local/etc/xray
+    mkdir -p /var/www/html
 
-# // String / Request Data
-sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
-subsl=$(</dev/urandom tr -dc a-z0-9 | head -c5)
-DOMAIN=kingvpn.my.id
-SUB_DOMAIN=${sub}.kingvpn.my.id
-CF_ID=hannaugo@gmail.com
-CF_KEY=e3341a6705e970eda3577f440d0cca6e3d682
-set -euo pipefail
-IP=$(curl -sS ifconfig.me);
-echo "Updating DNS for ${SUB_DOMAIN}..."
-ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" | jq -r .result[0].id)
+    # // String / Request Data
+    sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
+    subsl=$(</dev/urandom tr -dc a-z0-9 | head -c5)
+    DOMAIN=cyberboy.site
+    SUB_DOMAIN=${sub}.cyberboy.site
+    CF_KEY=sqtXdf6Yn8ij9yE8_bObKcePsr6GaE0FMTqKBNrU
+    set -euo pipefail
+    IP=$(curl -sS ifconfig.me);
+    echo "Updating DNS for ${SUB_DOMAIN}..."
+    ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
+        -H "Authorization: Bearer ${CF_KEY}" \
+        -H "Content-Type: application/json" | jq -r .result[0].id)
 
-RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${SUB_DOMAIN}" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" | jq -r .result[0].id)
+    RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${SUB_DOMAIN}" \
+        -H "Authorization: Bearer ${CF_KEY}" \
+        -H "Content-Type: application/json" | jq -r .result[0].id)
 
-if [[ "${#RECORD}" -le 10 ]]; then
-     RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
-     
-fi
+    if [[ "${#RECORD}" -le 10 ]]; then
+        RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
+        -H "Authorization: Bearer ${CF_KEY}" \
+        -H "Content-Type: application/json" \
+        --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
+        
+    fi
 
-RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
+    RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
+        -H "Authorization: Bearer ${CF_KEY}" \
+        -H "Content-Type: application/json" \
+        --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
 
-     
-echo "Host : $SUB_DOMAIN"
-echo "NS : $NS_DOMAIN"
-echo $SUB_DOMAIN > /root/domain
-echo $NS_DOMAIN > /root/nsdomain
-echo "IP=$SUB_DOMAIN" > /var/lib/scrz-prem/ipvps.conf
-sleep 1
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-yellow "Domain added.."
-sleep 3
-domain=$(cat /root/domain)
-nsdomain=$(cat /root/nsdomain)
-cp -r /root/domain /etc/xray/domain
+        
+    echo "Host : $SUB_DOMAIN"
+    echo "NS : $NS_DOMAIN"
+    echo $SUB_DOMAIN > /root/domain
+    echo $NS_DOMAIN > /root/nsdomain
+    echo "IP=$SUB_DOMAIN" > /var/lib/scrz-prem/ipvps.conf
+    sleep 1
+    yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
+    yellow "Domain added.."
+    sleep 3
+    domain=$(cat /root/domain)
+    nsdomain=$(cat /root/nsdomain)
+    cp -r /root/domain /etc/xray/domain
 
-# // Making Certificate
-clear
-echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... " 
-sleep 2
-echo -e "${OKEY} Starting Generating Certificate"
-rm -fr /root/.acme.sh
-mkdir -p /root/.acme.sh
-curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-chmod +x /root/.acme.sh/acme.sh
-/root/.acme.sh/acme.sh --upgrade
-/root/.acme.sh/acme.sh --upgrade --auto-upgrade
-/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
-# // Success
-echo -e "${OKEY} Your Domain : $domain"
-sleep 2
+    # // Making Certificate
+    clear
+    echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... " 
+    sleep 2
+    echo -e "${OKEY} Starting Generating Certificate"
+    rm -fr /root/.acme.sh
+    mkdir -p /root/.acme.sh
+    curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
+    chmod +x /root/.acme.sh/acme.sh
+    /root/.acme.sh/acme.sh --upgrade
+    /root/.acme.sh/acme.sh --upgrade --auto-upgrade
+    /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+    /root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
+    ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
+    # // Success
+    echo -e "${OKEY} Your Domain : $domain"
+    sleep 2
 
 elif [[ $choose_domain == "1" ]]; then
 
-# // Clear
-clear
-clear && clear && clear
-clear;clear;clear
-
-echo -e "${GREEN}Indonesian Language${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo -e "Silakan Pointing Domain Anda Ke IP VPS"
-echo -e "Untuk Caranya Arahkan NS Domain Ke Cloudflare"
-echo -e "Kemudian Tambahkan A Record Dengan IP VPS"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo ""
-echo ""
-
-# // Reading Your Input
-read -p "Input Your Domain : " domain
-read -p "Input Your NSdomain  : " nsdomain
-if [[ $domain == "" ]]; then
+    # // Clear
     clear
-    echo -e "${EROR} No Input Detected !"
-    exit 1
-fi
+    clear && clear && clear
+    clear;clear;clear
 
-# // Folder Sistem Yang Tidak Boleh Di Hapus
-mkdir -p /usr/bin
-# // Remove File & Directory
-rm -fr /usr/local/bin/xray
-rm -fr /usr/local/bin/stunnel
-rm -fr /usr/local/bin/stunnel5
-rm -fr /etc/nginx
-rm -fr /var/lib/scrz-prem/
-rm -fr /usr/bin/xray
-rm -fr /etc/xray
-rm -fr /usr/local/etc/xray
-# // Making Directory 
-mkdir -p /etc/nginx
-mkdir -p /var/lib/scrz-prem/
-mkdir -p /usr/bin/xray
-mkdir -p /etc/xray
-mkdir -p /usr/local/etc/xray
+    echo -e "${GREEN}Indonesian Language${NC}"
+    echo -e "${YELLOW}-----------------------------------------------------${NC}"
+    echo -e "Silakan Pointing Domain Anda Ke IP VPS"
+    echo -e "Untuk Caranya Arahkan NS Domain Ke Cloudflare"
+    echo -e "Kemudian Tambahkan A Record Dengan IP VPS"
+    echo -e "${YELLOW}-----------------------------------------------------${NC}"
+    echo ""
+    echo ""
+
+    # // Reading Your Input
+    read -p "Input Your Domain : " domain
+    read -p "Input Your NSdomain  : " nsdomain
+    if [[ $domain == "" ]]; then
+        clear
+        echo -e "${EROR} No Input Detected !"
+        exit 1
+    fi
+
+    # // Folder Sistem Yang Tidak Boleh Di Hapus
+    mkdir -p /usr/bin
+    # // Remove File & Directory
+    rm -fr /usr/local/bin/xray
+    rm -fr /usr/local/bin/stunnel
+    rm -fr /usr/local/bin/stunnel5
+    rm -fr /etc/nginx
+    rm -fr /var/lib/scrz-prem/
+    rm -fr /usr/bin/xray
+    rm -fr /etc/xray
+    rm -fr /usr/local/etc/xray
+    # // Making Directory 
+    mkdir -p /etc/nginx
+    mkdir -p /var/lib/scrz-prem/
+    mkdir -p /usr/bin/xray
+    mkdir -p /etc/xray
+    mkdir -p /usr/local/etc/xray
 
 
-# // Input Domain TO VPS
-echo "$domain" > /etc/${Auther}/domain.txt
-echo "IP=$domain" > /var/lib/scrz-prem/ipvps.conf
-echo "$domain" > /root/domain
-echo $nsdomain >/etc/xray/dns
-echo $nsdomain >/root/nsdomain
-echo $nsdomain >/etc/xray/nsdomain
-echo $nsdomain >/etc/slowdns/nsdomain
-domain=$(cat /root/domain)
+    # // Input Domain TO VPS
+    echo "$domain" > /etc/${Auther}/domain.txt
+    echo "IP=$domain" > /var/lib/scrz-prem/ipvps.conf
+    echo "$domain" > /root/domain
+    echo $nsdomain >/etc/xray/dns
+    echo $nsdomain >/root/nsdomain
+    echo $nsdomain >/etc/xray/nsdomain
+    echo $nsdomain >/etc/slowdns/nsdomain
+    domain=$(cat /root/domain)
 
-#SETUP ALL INFORMATION
-cp -r /root/domain /etc/xray/domain
-curl ipinfo.io/org > /root/.isp
-curl ipinfo.io/city > /root/.city
-curl ipinfo.io/org > /root/.myisp
-curl ipinfo.io/city > /root/.mycity
-curl ifconfig.me > /root/.ip
-curl ipinfo.io/region > /root/.region
-curl ifconfig.me > /root/.myip
-# // Making Certificate
-clear
-echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... " 
-sleep 2
-echo -e "${OKEY} Starting Generating Certificate"
-rm -fr /root/.acme.sh
-mkdir -p /root/.acme.sh
-curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-chmod +x /root/.acme.sh/acme.sh
-/root/.acme.sh/acme.sh --upgrade
-/root/.acme.sh/acme.sh --upgrade --auto-upgrade
-/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
-# // Success
-echo -e "${OKEY} Your Domain : $domain"
-sleep 2
+    #SETUP ALL INFORMATION
+    cp -r /root/domain /etc/xray/domain
+    curl ipinfo.io/org > /root/.isp
+    curl ipinfo.io/city > /root/.city
+    curl ipinfo.io/org > /root/.myisp
+    curl ipinfo.io/city > /root/.mycity
+    curl ifconfig.me > /root/.ip
+    curl ipinfo.io/region > /root/.region
+    curl ifconfig.me > /root/.myip
+    # // Making Certificate
+    clear
+    echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... " 
+    sleep 2
+    echo -e "${OKEY} Starting Generating Certificate"
+    rm -fr /root/.acme.sh
+    mkdir -p /root/.acme.sh
+    curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
+    chmod +x /root/.acme.sh/acme.sh
+    /root/.acme.sh/acme.sh --upgrade
+    /root/.acme.sh/acme.sh --upgrade --auto-upgrade
+    /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+    /root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
+    ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
+    # // Success
+    echo -e "${OKEY} Your Domain : $domain"
+    sleep 2
 
 # // Else Do
 else
     echo -e "${EROR} Please Choose 1 & 2 Only !"
     exit 1
 fi
+
 function make_folder_xray() {
-#mkdir folder
- mkdir -p /etc/cobek
- mkdir -p /etc/cobek/limit
- mkdir -p /etc/cobek/limit/trojan
- mkdir -p /etc/cobek/limit/vless
- mkdir -p /etc/cobek/limit/vmess
- mkdir -p /etc/cobek/limit/ssh
- mkdir -p /etc/cobek/limit/ssh/ip
- mkdir -p /etc/cobek/limit/trojan/ip
- mkdir -p /etc/cobek/limit/trojan/quota
- mkdir -p /etc/cobek/limit/vless/ip
- mkdir -p /etc/cobek/limit/vless/quota
- mkdir -p /etc/cobek/limit/vmess/ip
- mkdir -p /etc/cobek/limit/vmess/quota
- mkdir -p /etc/cobek/trojan
- mkdir -p /etc/cobek/vless
- mkdir -p /etc/cobek/vmess
- mkdir -p /etc/cobek/log
- mkdir -p /etc/cobek/log/trojan
- mkdir -p /etc/cobek/log/vless
- mkdir -p /etc/cobek/log/vmess
- mkdir -p /etc/cobek/log/ssh
- mkdir -p /etc/cobek/cache
- mkdir -p /etc/cobek/cache/trojan-tcp
- mkdir -p /etc/cobek/cache/trojan-ws
- mkdir -p /etc/cobek/cache/trojan-grpc
- mkdir -p /etc/cobek/cache/vless-ws
- mkdir -p /etc/cobek/cache/vless-grpc
- mkdir -p /etc/cobek/cache/vmess-ws
- mkdir -p /etc/cobek/cache/vmess-grpc
- mkdir -p /etc/cobek/cache/vmess-ws-orbit
- mkdir -p /etc/cobek/cache/vmess-ws-orbit1
-    }
+    #mkdir folder
+    mkdir -p /etc/cobek
+    mkdir -p /etc/cobek/limit
+    mkdir -p /etc/cobek/limit/trojan
+    mkdir -p /etc/cobek/limit/vless
+    mkdir -p /etc/cobek/limit/vmess
+    mkdir -p /etc/cobek/limit/ssh
+    mkdir -p /etc/cobek/limit/ssh/ip
+    mkdir -p /etc/cobek/limit/trojan/ip
+    mkdir -p /etc/cobek/limit/trojan/quota
+    mkdir -p /etc/cobek/limit/vless/ip
+    mkdir -p /etc/cobek/limit/vless/quota
+    mkdir -p /etc/cobek/limit/vmess/ip
+    mkdir -p /etc/cobek/limit/vmess/quota
+    mkdir -p /etc/cobek/trojan
+    mkdir -p /etc/cobek/vless
+    mkdir -p /etc/cobek/vmess
+    mkdir -p /etc/cobek/log
+    mkdir -p /etc/cobek/log/trojan
+    mkdir -p /etc/cobek/log/vless
+    mkdir -p /etc/cobek/log/vmess
+    mkdir -p /etc/cobek/log/ssh
+    mkdir -p /etc/cobek/cache
+    mkdir -p /etc/cobek/cache/trojan-tcp
+    mkdir -p /etc/cobek/cache/trojan-ws
+    mkdir -p /etc/cobek/cache/trojan-grpc
+    mkdir -p /etc/cobek/cache/vless-ws
+    mkdir -p /etc/cobek/cache/vless-grpc
+    mkdir -p /etc/cobek/cache/vmess-ws
+    mkdir -p /etc/cobek/cache/vmess-grpc
+    mkdir -p /etc/cobek/cache/vmess-ws-orbit
+    mkdir -p /etc/cobek/cache/vmess-ws-orbit1
+}
 	
 #install arzsource
 echo -e "┌─────────────────────────────────────────┐"
 echo -e " \E[41;1;39m           >>> Install Source <<<        \E[0m$NC"
 echo -e "└─────────────────────────────────────────┘"
-wget -q https://raw.githubusercontent.com/king-vpn/v6/main/tools/anggunsource.sh && chmod +x anggunsource.sh && ./anggunsource.sh
+wget -q https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/anggunsource.sh && chmod +x anggunsource.sh && ./anggunsource.sh
 #install ssh-vpn
 echo -e "┌─────────────────────────────────────────┐"
 echo -e " \E[41;1;39m          >>> Install SSH WS <<<        \E[0m$NC"
 echo -e "└─────────────────────────────────────────┘"
-wget -q https://raw.githubusercontent.com/king-vpn/v6/main/tools/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget -q https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #install ins-xray
 echo -e "┌─────────────────────────────────────────┐"
 echo -e " \E[41;1;39m            >>> Install Xray <<<         \E[0m$NC"
 echo -e "└─────────────────────────────────────────┘"
-wget -q https://raw.githubusercontent.com/king-vpn/v6/main/tools/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget -q https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 
 #install ins-xray
 echo -e "┌─────────────────────────────────────────┐"
 echo -e " \E[41;1;39m            >>> Install BR <<<           \E[0m$NC"
 echo -e "└─────────────────────────────────────────┘"
-wget -q https://raw.githubusercontent.com/king-vpn/v6/main/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
+wget -q https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
 
 # // Download Data
 echo -e "${GREEN}Download Data${NC}"
-wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/king-vpn/v6/main/usernew.sh"
-wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/king-vpn/v6/main/add-ws.sh"
-wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/king-vpn/v6/main/add-ssws.sh"
-wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/king-vpn/v6/main/add-vless.sh"
-wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/king-vpn/v6/main/add-tr.sh"
-wget -q -O /usr/bin/autoreboot "https://raw.githubusercontent.com/king-vpn/v6/main/options/autoreboot.sh"
-wget -q -O /usr/bin/restart "https://raw.githubusercontent.com/king-vpn/v6/main/options/restart.sh"
-wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/king-vpn/v6/main/options/tendang.sh"
-wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/king-vpn/v6/main/options/clearlog.sh"
-wget -q -O /usr/bin/running "https://raw.githubusercontent.com/king-vpn/v6/main/options/running.sh"
-#wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/king-vpn/v6/main/options/cek-trafik.sh"
-wget -q -O /usr/bin/speedtest "https://raw.githubusercontent.com/king-vpn/v6/main/tools/speedtest_cli.py"
-wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/king-vpn/v6/main/options/cek-bandwidth.sh"
-wget -q -O /usr/bin/limitspeed "https://raw.githubusercontent.com/king-vpn/v6/main/options/limitspeed.sh"
-wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-vless.sh"
-wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-vmess.sh"
-wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-ss.sh"
-wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-trojan.sh"
-wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-ssh.sh"
-wget -q -O /usr/bin/menu-backup "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-backup.sh"
-wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu.sh"
-wget -q -O /usr/bin/webmin "https://raw.githubusercontent.com/king-vpn/v6/main/options/webmin.sh"
-wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/king-vpn/v6/main/xp.sh"
-wget -q -O /usr/bin/update "https://raw.githubusercontent.com/king-vpn/v6/main/options/update.sh"
-wget -q -O /usr/bin/addhost "https://raw.githubusercontent.com/king-vpn/v6/main/menu/addhost.sh"
-wget -q -O /usr/bin/certxray "https://raw.githubusercontent.com/king-vpn/v6/main/menu/crt.sh"
-wget -q -O /usr/bin/menu-set "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-set.sh"
-wget -q -O /usr/bin/info "https://raw.githubusercontent.com/king-vpn/v6/main/options/info.sh"
-wget -q -O /usr/bin/infoserv "https://raw.githubusercontent.com/king-vpn/v6/main/options/infoserv.sh"
-wget -q -O /usr/bin/about "https://raw.githubusercontent.com/king-vpn/v6/main/options/about.sh"
+wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/usernew.sh"
+wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/add-ws.sh"
+wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/add-ssws.sh"
+wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/add-vless.sh"
+wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/add-tr.sh"
+wget -q -O /usr/bin/autoreboot "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/autoreboot.sh"
+wget -q -O /usr/bin/restart "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/restart.sh"
+wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/tendang.sh"
+wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/clearlog.sh"
+wget -q -O /usr/bin/running "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/running.sh"
+#wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/cek-trafik.sh"
+wget -q -O /usr/bin/speedtest "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/speedtest_cli.py"
+wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/cek-bandwidth.sh"
+wget -q -O /usr/bin/limitspeed "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/limitspeed.sh"
+wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-vless.sh"
+wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-vmess.sh"
+wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-ss.sh"
+wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-trojan.sh"
+wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-ssh.sh"
+wget -q -O /usr/bin/menu-backup "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-backup.sh"
+wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu.sh"
+wget -q -O /usr/bin/webmin "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/webmin.sh"
+wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/xp.sh"
+wget -q -O /usr/bin/update "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/update.sh"
+wget -q -O /usr/bin/addhost "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/addhost.sh"
+wget -q -O /usr/bin/certxray "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/crt.sh"
+wget -q -O /usr/bin/menu-set "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-set.sh"
+wget -q -O /usr/bin/info "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/info.sh"
+wget -q -O /usr/bin/infoserv "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/infoserv.sh"
+wget -q -O /usr/bin/about "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/about.sh"
 wget -q -O /usr/bin/sslh-fix-reboot "https://raw.githubusercontent.com/fisabiliyusri/Mantap/main/sslh-fix/sslh-fix-reboot.sh"
 cd /usr/sbin
-wget -q -O /usr/bin/mesinssh "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/mesinssh.sh"
-wget -q -O /usr/bin/cek-ssh "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/cek-ssh.sh"
+wget -q -O /usr/bin/mesinssh "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/mesinssh.sh"
+wget -q -O /usr/bin/cek-ssh "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/cek-ssh.sh"
 chmod +x *
 chmod +x /usr/sbin/*
 cd /usr/bin
-wget -q -O /usr/bin/loop "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/loop.sh"
-wget -q -O /usr/bin/matikan "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/matikan.sh"
-wget -q -O /usr/bin/limit "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/limit.sh"
-wget -q -O /usr/bin/limit-ip-ssh "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/limit-ip-ssh.sh"
-wget -q -O /usr/bin/limit-ip-trojan "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/limit-ip-trojan.sh"
-wget -q -O /usr/bin/limit-ip-vless "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/limit-ip-vless.sh"
-wget -q -O /usr/bin/limit-ip-vmess "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/limit-ip-vmess.sh"
-wget -q -O /usr/bin/limit-quota-trojan "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/limit-quota-trojan.sh"
-wget -q -O /usr/bin/limit-quota-vmess "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/limit-quota-vmess.sh"
-wget -q -O /usr/bin/limit-quota-vless "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/limit-quota-vless.sh"
-wget -q -O /usr/bin/quota "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/quota.sh"
-wget -q -O /usr/bin/quota-trojan-grpc "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/quota-trojan-grpc.sh"
-wget -q -O /usr/bin/quota-trojan-ws "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/quota-trojan-ws.sh"
-wget -q -O /usr/bin/quota-vmess-grpc "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/quota-vmess-grpc.sh"
-wget -q -O /usr/bin/quota-vmess-ws "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/quota-vmess-ws.sh"
-wget -q -O /usr/bin/quota-vless-ws "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/quota-vless-ws.sh"
-wget -q -O /usr/bin/quota-vless-grpc "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/quota-vless-grpc.sh"
-wget -q -O /usr/bin/quota-vmess-orbit "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/quota-vmess-ws-orbit.sh"
-wget -q -O /usr/bin/quota-vmess-orbit1 "https://raw.githubusercontent.com/king-vpn/v6/main/tools/limit/quota-vmess-ws-orbit1.sh"
-wget -q -O /usr/bin/jam "https://raw.githubusercontent.com/king-vpn/v6/main/jam.sh"
+wget -q -O /usr/bin/loop "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/loop.sh"
+wget -q -O /usr/bin/matikan "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/matikan.sh"
+wget -q -O /usr/bin/limit "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/limit.sh"
+wget -q -O /usr/bin/limit-ip-ssh "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/limit-ip-ssh.sh"
+wget -q -O /usr/bin/limit-ip-trojan "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/limit-ip-trojan.sh"
+wget -q -O /usr/bin/limit-ip-vless "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/limit-ip-vless.sh"
+wget -q -O /usr/bin/limit-ip-vmess "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/limit-ip-vmess.sh"
+wget -q -O /usr/bin/limit-quota-trojan "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/limit-quota-trojan.sh"
+wget -q -O /usr/bin/limit-quota-vmess "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/limit-quota-vmess.sh"
+wget -q -O /usr/bin/limit-quota-vless "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/limit-quota-vless.sh"
+wget -q -O /usr/bin/quota "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/quota.sh"
+wget -q -O /usr/bin/quota-trojan-grpc "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/quota-trojan-grpc.sh"
+wget -q -O /usr/bin/quota-trojan-ws "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/quota-trojan-ws.sh"
+wget -q -O /usr/bin/quota-vmess-grpc "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/quota-vmess-grpc.sh"
+wget -q -O /usr/bin/quota-vmess-ws "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/quota-vmess-ws.sh"
+wget -q -O /usr/bin/quota-vless-ws "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/quota-vless-ws.sh"
+wget -q -O /usr/bin/quota-vless-grpc "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/quota-vless-grpc.sh"
+wget -q -O /usr/bin/quota-vmess-orbit "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/quota-vmess-ws-orbit.sh"
+wget -q -O /usr/bin/quota-vmess-orbit1 "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/limit/quota-vmess-ws-orbit1.sh"
+wget -q -O /usr/bin/jam "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/jam.sh"
 chmod +x /usr/bin/*
 cd 
 chmod +x /usr/bin/usernew
@@ -585,7 +580,7 @@ if [ ! -f "/etc/log-create-user.log" ]; then
 echo "Log All Account " > /etc/log-create-user.log
 fi
 history -c
-serverV=$( curl -sS https://raw.githubusercontent.com/king-vpn/v6/main/version  )
+serverV=$( curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/version  )
 echo $serverV > /opt/.ver
 aureb=$(cat /home/re_otm)
 b=11
@@ -685,7 +680,7 @@ Client Name: $Name
 
 "
 clear
-curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
+# curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
 echo ""
 clear
 echo -e "

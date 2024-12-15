@@ -56,15 +56,15 @@ BURIQ () {
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
-    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
-    d1=(`date -d "$exp" +%s`)
-    d2=(`date -d "$biji" +%s`)
-    exp2=$(( (d1 - d2) / 86400 ))
-    if [[ "$exp2" -le "0" ]]; then
-    echo $user > /etc/.$user.ini
-    else
-    rm -f /etc/.$user.ini > /dev/null 2>&1
-    fi
+        exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+        d1=(`date -d "$exp" +%s`)
+        d2=(`date -d "$biji" +%s`)
+        exp2=$(( (d1 - d2) / 86400 ))
+        if [[ "$exp2" -le "0" ]]; then
+            echo $user > /etc/.$user.ini
+        else
+            rm -f /etc/.$user.ini > /dev/null 2>&1
+        fi
     done
     rm -f /root/tmp
 }
@@ -75,23 +75,23 @@ echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
 Bloman () {
-if [ -f "/etc/.$Name.ini" ]; then
-CekTwo=$(cat /etc/.$Name.ini)
-    if [ "$CekOne" = "$CekTwo" ]; then
-        res="Expired"
+    if [ -f "/etc/.$Name.ini" ]; then
+    CekTwo=$(cat /etc/.$Name.ini)
+        if [ "$CekOne" = "$CekTwo" ]; then
+            res="Expired"
+        fi
+    else
+        res="Permission Accepted..."
     fi
-else
-res="Permission Accepted..."
-fi
 }
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
     IZIN=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
-    Bloman
+        Bloman
     else
-    res="Permission Denied!"
+        res="Permission Denied!"
     fi
     BURIQ
 }
@@ -102,13 +102,13 @@ green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 PERMISSION
 if [ -f /home/needupdate ]; then
-red "Your script need to update first !"
-exit 0
+    red "Your script need to update first !"
+    exit 0
 elif [ "$res" = "Permission Accepted..." ]; then
-echo -ne
+    echo -ne
 else
-red "Permission Denied!"
-exit 0
+    red "Permission Denied!"
+    exit 0
 fi
 
 export DEBIAN_FRONTEND=noninteractive
@@ -122,26 +122,26 @@ ver=$VERSION_ID
 country=ID
 state=Indonesia
 locality=Indonesia
-organization=Effata
-organizationalunit=EffataIDStore
-commonname=EffataStore
-email=effataidstore@gmail.com
+organization=Cyberboy
+organizationalunit=CyberboyIDStore
+commonname=CyberboyStore
+email=fitrarizki.dev@gmail.com
 
 # simple password minimal
-wget -q -O /etc/pam.d/common-password "https://raw.githubusercontent.com/AngIMAN/v6/main/tools/password"
+wget -q -O /etc/pam.d/common-password "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/password"
 chmod +x /etc/pam.d/common-password
 
 # go to root
 cd
 
 # Getting websocket dropbear
-wget -q -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/AngIMAN/v6/main/tools/ws-dropbear"
+wget -q -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/ws-dropbear"
 chmod +x /usr/local/bin/ws-dropbear
 
 # Installing Service
 cat > /etc/systemd/system/ws-dropbear.service << END
 [Unit]
-Description=Ssh Websocket By EffataStore
+Description=Ssh Websocket By CyberboyStore
 Documentation=https://web.cobeksawit.xyz:5255
 After=network.target nss-lookup.target
 
@@ -166,13 +166,13 @@ systemctl restart ws-dropbear >/dev/null 2>&1
 clear 
 
 # Getting websocket ssl stunnel
-wget -q -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/AngIMAN/v6/main/tools/ws-stunnel"
+wget -q -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/ws-stunnel"
 chmod +x /usr/local/bin/ws-stunnel
 
 # Installing Service Ovpn Websocket
 cat > /etc/systemd/system/ws-stunnel.service << END
 [Unit]
-Description=Ovpn Websocket By EffataStore
+Description=Ovpn Websocket By CyberboyStore
 Documentation=https://web.cobeksawit.xyz:5255
 After=network.target nss-lookup.target
 [Service]
@@ -269,7 +269,7 @@ echo -ne
 fi
 cd
 echo -e "[ ${green}INFO$NC ] Installing badvpn for game support..."
-wget -q -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/AngIMAN/v6/main/tools/newudpgw"
+wget -q -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/newudpgw"
 chmod +x /usr/bin/badvpn-udpgw  >/dev/null 2>&1
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500' /etc/rc.local >/dev/null 2>&1
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500' /etc/rc.local >/dev/null 2>&1
@@ -305,15 +305,15 @@ systemctl start dropbear >/dev/null 2>&1
 systemctl restart dropbear >/dev/null 2>&1
 cekker=$(cat /etc/shells | grep -w "/bin/false")
 if [[ "$cekker" = "/bin/false" ]];then
-echo -ne
+    echo -ne
 else
-echo "/bin/false" >> /etc/shells
-echo "/usr/sbin/nologin" >> /etc/shells
+    echo "/bin/false" >> /etc/shells
+    echo "/usr/sbin/nologin" >> /etc/shells
 fi
 
 # Install Stunnel5
 cd /root/
-wget -q "https://raw.githubusercontent.com/AngIMAN/v6/main/tools/stunnel5.zip"
+wget -q "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/stunnel5.zip"
 unzip stunnel5.zip
 cd /root/stunnel
 chmod +x configure
@@ -376,7 +376,7 @@ END
 
 # Service Stunnel5 /etc/init.d/stunnel5
 rm -fr /etc/init.d/stunnel5
-wget -q -O /etc/init.d/stunnel5 "https://raw.githubusercontent.com/AngIMAN/v6/main/tools/stunnel5.init"
+wget -q -O /etc/init.d/stunnel5 "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/stunnel5.init"
 
 # Ubah Izin Akses
 #chmod 600 /etc/stunnel5/stunnel5.pem
@@ -416,53 +416,53 @@ Check_And_Add_Line(){
 }
 
 Install_BBR(){
-echo "#############################################"
-echo "Install TCP_BBR..."
-if [ -n "$(lsmod | grep bbr)" ];then
-echo "TCP_BBR sudah diinstall."
-echo "#############################################"
-return 1
-fi
-echo "Mulai menginstall TCP_BBR..."
-modprobe tcp_bbr
-Add_To_New_Line "/etc/modules-load.d/modules.conf" "tcp_bbr"
-Add_To_New_Line "/etc/sysctl.conf" "net.core.default_qdisc = fq"
-Add_To_New_Line "/etc/sysctl.conf" "net.ipv4.tcp_congestion_control = bbr"
-sysctl -p
-if [ -n "$(sysctl net.ipv4.tcp_available_congestion_control | grep bbr)" ] && [ -n "$(sysctl net.ipv4.tcp_congestion_control | grep bbr)" ] && [ -n "$(lsmod | grep "tcp_bbr")" ];then
-	echo "TCP_BBR Install Success."
-else
-	echo "Gagal menginstall TCP_BBR."
-fi
-echo "#############################################"
+    echo "#############################################"
+    echo "Install TCP_BBR..."
+    if [ -n "$(lsmod | grep bbr)" ];then
+        echo "TCP_BBR sudah diinstall."
+        echo "#############################################"
+        return 1
+    fi
+    echo "Mulai menginstall TCP_BBR..."
+    modprobe tcp_bbr
+    Add_To_New_Line "/etc/modules-load.d/modules.conf" "tcp_bbr"
+    Add_To_New_Line "/etc/sysctl.conf" "net.core.default_qdisc = fq"
+    Add_To_New_Line "/etc/sysctl.conf" "net.ipv4.tcp_congestion_control = bbr"
+    sysctl -p
+    if [ -n "$(sysctl net.ipv4.tcp_available_congestion_control | grep bbr)" ] && [ -n "$(sysctl net.ipv4.tcp_congestion_control | grep bbr)" ] && [ -n "$(lsmod | grep "tcp_bbr")" ];then
+        echo "TCP_BBR Install Success."
+    else
+        echo "Gagal menginstall TCP_BBR."
+    fi
+    echo "#############################################"
 }
 
 Optimize_Parameters(){
-echo "#############################################"
-echo "Optimasi Parameters..."
-Check_And_Add_Line "/etc/security/limits.conf" "* soft nofile 51200"
-Check_And_Add_Line "/etc/security/limits.conf" "* hard nofile 51200"
-Check_And_Add_Line "/etc/security/limits.conf" "root soft nofile 51200"
-Check_And_Add_Line "/etc/security/limits.conf" "root hard nofile 51200"
-Check_And_Add_Line "/etc/sysctl.conf" "fs.file-max = 51200"
-Check_And_Add_Line "/etc/sysctl.conf" "net.core.rmem_max = 67108864"
-Check_And_Add_Line "/etc/sysctl.conf" "net.core.wmem_max = 67108864"
-Check_And_Add_Line "/etc/sysctl.conf" "net.core.netdev_max_backlog = 250000"
-Check_And_Add_Line "/etc/sysctl.conf" "net.core.somaxconn = 4096"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_syncookies = 1"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_tw_reuse = 1"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_fin_timeout = 30"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_keepalive_time = 1200"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.ip_local_port_range = 10000 65000"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_max_syn_backlog = 8192"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_max_tw_buckets = 5000"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_fastopen = 3"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_mem = 25600 51200 102400"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_rmem = 4096 87380 67108864"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_wmem = 4096 65536 67108864"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_mtu_probing = 1"
-echo "Optimasi Parameters Selesai."
-echo "#############################################"
+    echo "#############################################"
+    echo "Optimasi Parameters..."
+    Check_And_Add_Line "/etc/security/limits.conf" "* soft nofile 51200"
+    Check_And_Add_Line "/etc/security/limits.conf" "* hard nofile 51200"
+    Check_And_Add_Line "/etc/security/limits.conf" "root soft nofile 51200"
+    Check_And_Add_Line "/etc/security/limits.conf" "root hard nofile 51200"
+    Check_And_Add_Line "/etc/sysctl.conf" "fs.file-max = 51200"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.core.rmem_max = 67108864"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.core.wmem_max = 67108864"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.core.netdev_max_backlog = 250000"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.core.somaxconn = 4096"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_syncookies = 1"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_tw_reuse = 1"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_fin_timeout = 30"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_keepalive_time = 1200"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.ip_local_port_range = 10000 65000"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_max_syn_backlog = 8192"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_max_tw_buckets = 5000"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_fastopen = 3"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_mem = 25600 51200 102400"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_rmem = 4096 87380 67108864"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_wmem = 4096 65536 67108864"
+    Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_mtu_probing = 1"
+    echo "Optimasi Parameters Selesai."
+    echo "#############################################"
 }
 Install_BBR
 Optimize_Parameters
@@ -476,7 +476,7 @@ rm -fr /etc/issue.net
 rm -fr /etc/issue.net.save
 sleep 1
 echo -e "[ ${green}INFO$NC ] Settings banner"
-wget -q -O /etc/issue.net "https://raw.githubusercontent.com/AngIMAN/v6/main/issue.net"
+wget -q -O /etc/issue.net "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/issue.net"
 chmod +x /etc/issue.net
 echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
@@ -506,7 +506,7 @@ echo -e "[ ${green}INFO$NC ] Clearing trash"
 apt autoclean -y >/dev/null 2>&1
 
 if dpkg -s unscd >/dev/null 2>&1; then
-apt -y remove --purge unscd >/dev/null 2>&1
+    apt -y remove --purge unscd >/dev/null 2>&1
 fi
 
 # apt-get -y --purge remove samba* >/dev/null 2>&1

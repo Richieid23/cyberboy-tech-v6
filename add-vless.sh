@@ -40,15 +40,15 @@ BURIQ () {
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
-    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
-    d1=(`date -d "$exp" +%s`)
-    d2=(`date -d "$biji" +%s`)
-    exp2=$(( (d1 - d2) / 86400 ))
-    if [[ "$exp2" -le "0" ]]; then
-    echo $user > /etc/.$user.ini
-    else
-    rm -f /etc/.$user.ini > /dev/null 2>&1
-    fi
+        exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+        d1=(`date -d "$exp" +%s`)
+        d2=(`date -d "$biji" +%s`)
+        exp2=$(( (d1 - d2) / 86400 ))
+        if [[ "$exp2" -le "0" ]]; then
+            echo $user > /etc/.$user.ini
+        else
+            rm -f /etc/.$user.ini > /dev/null 2>&1
+        fi
     done
     rm -f /root/tmp
 }
@@ -59,35 +59,35 @@ echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
 Bloman () {
-if [ -f "/etc/.$Name.ini" ]; then
-CekTwo=$(cat /etc/.$Name.ini)
-    if [ "$CekOne" = "$CekTwo" ]; then
-        res="Expired"
+    if [ -f "/etc/.$Name.ini" ]; then
+    CekTwo=$(cat /etc/.$Name.ini)
+        if [ "$CekOne" = "$CekTwo" ]; then
+            res="Expired"
+        fi
+    else
+        res="Permission Accepted..."
     fi
-else
-res="Permission Accepted..."
-fi
 }
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
     IZIN=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
-    Bloman
+        Bloman
     else
-    res="Permission Denied!"
+        res="Permission Denied!"
     fi
     BURIQ
 }
 PERMISSION
 if [ -f /home/needupdate ]; then
-red "Your script need to update first !"
-exit 0
+    red "Your script need to update first !"
+    exit 0
 elif [ "$res" = "Permission Accepted..." ]; then
-echo -ne
+    echo -ne
 else
-red "Permission Denied!"
-exit 0
+    red "Permission Denied!"
+    exit 0
 fi
 clear
 source /var/lib/scrz-prem/ipvps.conf
@@ -99,41 +99,41 @@ fi
 tls="$(cat ~/log-install.txt | grep -w "Vless TLS" | cut -d: -f2|sed 's/ //g')"
 none="$(cat ~/log-install.txt | grep -w "Vless None TLS" | cut -d: -f2|sed 's/ //g')"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
-echo -e "┌─────────────────────────────────────────────────┐" | lolcat
-echo -e "│              CREATE VLESS ACCOUNT               │" | lolcat
-echo -e "└─────────────────────────────────────────────────┘" | lolcat
-read -p "Username         : " user
-read -p "Quota (GB)       : " quota
-read -p "Max Ip login     : " iplimit
-read -p "Masaaktif        : " masaaktif
+    echo -e "┌─────────────────────────────────────────────────┐" | lolcat
+    echo -e "│              CREATE VLESS ACCOUNT               │" | lolcat
+    echo -e "└─────────────────────────────────────────────────┘" | lolcat
+    read -p "Username         : " user
+    read -p "Quota (GB)       : " quota
+    read -p "Max Ip login     : " iplimit
+    read -p "Masaaktif        : " masaaktif
 
-#QUOTA
-if [[ $quota -gt 0 ]]; then
-echo -e "$[$quota * 1024 * 1024 * 1024]" > /etc/cobek/limit/vless/quota/$user
-else
-echo > /dev/null
-fi
-#IPLIMIT
-if [[ $iplimit -gt 0 ]]; then
-echo -e "$iplimit" > /etc/cobek/limit/vless/ip/$user
-else
-echo > /dev/null
-fi
+    #QUOTA
+    if [[ $quota -gt 0 ]]; then
+        echo -e "$[$quota * 1024 * 1024 * 1024]" > /etc/cobek/limit/vless/quota/$user
+    else
+        echo > /dev/null
+    fi
+    #IPLIMIT
+    if [[ $iplimit -gt 0 ]]; then
+        echo -e "$iplimit" > /etc/cobek/limit/vless/ip/$user
+    else
+        echo > /dev/null
+    fi
 
-		CLIENT_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
+    CLIENT_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
 
-		if [[ ${CLIENT_EXISTS} == '1' ]]; then
-clear
-echo -e "┌─────────────────────────────────────────────────┐" | lolcat
-echo -e "│              CREATE VLESS ACCOUNT               │" | lolcat
-echo -e "└─────────────────────────────────────────────────┘" | lolcat
-			echo ""
-			echo "A client with the specified name was already created, please choose another name."
-			echo ""
-			read -n 1 -s -r -p "Press any key to back on menu"
-			v2ray-menu
-		fi
-	done
+    if [[ ${CLIENT_EXISTS} == '1' ]]; then
+        clear
+        echo -e "┌─────────────────────────────────────────────────┐" | lolcat
+        echo -e "│              CREATE VLESS ACCOUNT               │" | lolcat
+        echo -e "└─────────────────────────────────────────────────┘" | lolcat
+        echo ""
+        echo "A client with the specified name was already created, please choose another name."
+        echo ""
+        read -n 1 -s -r -p "Press any key to back on menu"
+        v2ray-menu
+    fi
+done
 
 uuid=$(cat /proc/sys/kernel/random/uuid)
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`

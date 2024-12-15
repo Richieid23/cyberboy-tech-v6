@@ -20,7 +20,7 @@ IPurple='\033[0;95m'      # Purple
 ICyan='\033[0;96m'        # Cyan
 IWhite='\033[0;97m'       # White
 NC='\e[0m'
-GitUser="arismaramar"
+GitUser="Richieid23"
 if [ "${EUID}" -ne 0 ]; then
                 echo "You need to run this script as root"
                 exit 1
@@ -31,7 +31,7 @@ if [ "$(systemd-detect-virt)" == "openvz" ]; then
 fi
 echo ""
 version=$(cat /opt/.ver)
-ver=$( curl https://raw.githubusercontent.com/${GitUser}/v6/main/version )
+ver=$( curl https://raw.githubusercontent.com/${GitUser}/cyberboy-tech-v6/refs/heads/main/version )
 clear
 # CEK UPDATE
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
@@ -39,7 +39,7 @@ Info1="$BIWhite($version)${Font_color_suffix}"
 Info2="$BIWhite(LATEST VERSION)${Font_color_suffix}"
 Error="Version $BIWhite[$ver]${Font_color_suffix} available${Red_font_prefix}[Please Update]${Font_color_suffix}"
 version=$(cat /opt/.ver)
-new_version=$( curl https://raw.githubusercontent.com/${GitUser}/v6/main/newversion | grep $version )
+new_version=$( curl https://raw.githubusercontent.com/${GitUser}/cyberboy-tech-v6/refs/heads/main/newversion | grep $version )
 #Status Version
 if [ $version = $new_version ]; then
 sts="${Info2}"
@@ -70,7 +70,7 @@ read -p "      PLEASE CHOOSE 1 or x : " option2
 case $option2 in
 1)
 version=$(cat /opt/.ver)
-new_version=$( curl https://raw.githubusercontent.com/${GitUser}/v6/main/newversion | grep $version )
+new_version=$( curl https://raw.githubusercontent.com/${GitUser}/cyberboy-tech-v6/refs/heads/main/newversion | grep $version )
 if [ $version = $new_version ]; then
 clear
 echo ""
@@ -111,7 +111,7 @@ echo -e "\e[0;32mGetting New Version Script..\e[0m"
 echo ""
 # UPDATE RUN-UPDATE
 cd /usr/bin
-wget -O run-update "https://raw.githubusercontent.com/${GitUser}/v6/main/options/update.sh"
+wget -O run-update "https://raw.githubusercontent.com/${GitUser}/cyberboy-tech-v6/refs/heads/main/options/update.sh"
 chmod +x run-update
 # RUN UPDATE
 echo ""
@@ -128,34 +128,34 @@ echo -e "│                 PROSES UPDATE                   │" | lolcat
 echo -e "└─────────────────────────────────────────────────┘" | lolcat
 echo -e "\e[0;32mNew Version Downloading started!\e[0m"
 cd /usr/bin
-wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/king-vpn/v6/main/add-ws.sh"
-wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/king-vpn/v6/main/add-ssws.sh"
-wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/king-vpn/v6/main/add-vless.sh"
-wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/king-vpn/v6/main/add-tr.sh"
-wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/king-vpn/v6/main/usernew.sh"
-wget -q -O /usr/bin/autoreboot "https://raw.githubusercontent.com/king-vpn/v6/main/options/autoreboot.sh"
-wget -q -O /usr/bin/restart "https://raw.githubusercontent.com/king-vpn/v6/main/options/restart.sh"
-wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/king-vpn/v6/main/options/tendang.sh"
-wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/king-vpn/v6/main/options/clearlog.sh"
-wget -q -O /usr/bin/running "https://raw.githubusercontent.com/king-vpn/v6/main/options/running.sh"
+wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/add-ws.sh"
+wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/add-ssws.sh"
+wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/add-vless.sh"
+wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/add-tr.sh"
+wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/usernew.sh"
+wget -q -O /usr/bin/autoreboot "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/autoreboot.sh"
+wget -q -O /usr/bin/restart "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/restart.sh"
+wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/tendang.sh"
+wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/clearlog.sh"
+wget -q -O /usr/bin/running "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/running.sh"
 #wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/arismaramar/v62/main/options/cek-trafik.sh"
-wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/king-vpn/v6/main/options/cek-bandwidth.sh"
-wget -q -O /usr/bin/limitspeed "https://raw.githubusercontent.com/king-vpn/v6/main/options/limitspeed.sh"
-wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-vless.sh"
-wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-vmess.sh"
-wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-ss.sh"
-wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-trojan.sh"
-wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-ssh.sh"
-wget -q -O /usr/bin/menu-backup "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-backup.sh"
-wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu.sh"
-wget -q -O /usr/bin/webmin "https://raw.githubusercontent.com/king-vpn/v6/main/options/webmin.sh"
-wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/king-vpn/v6/main/xp.sh"
-wget -q -O /usr/bin/update "https://raw.githubusercontent.com/king-vpn/v6/main/options/update.sh"
-#wget -q -O /usr/bin/menu-theme "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-theme.sh"
-wget -q -O /usr/bin/info "https://raw.githubusercontent.com/king-vpn/v6/main/options/info.sh"
-wget -q -O /usr/bin/infoserv "https://raw.githubusercontent.com/king-vpn/v6/main/options/infoserv.sh"
-wget -q -O /usr/bin/menu-set "https://raw.githubusercontent.com/king-vpn/v6/main/menu/menu-set.sh"
-wget -q -O /usr/bin/about "https://raw.githubusercontent.com/king-vpn/v6/main/options/about.sh"
+wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/cek-bandwidth.sh"
+wget -q -O /usr/bin/limitspeed "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/limitspeed.sh"
+wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-vless.sh"
+wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-vmess.sh"
+wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-ss.sh"
+wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-trojan.sh"
+wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-ssh.sh"
+wget -q -O /usr/bin/menu-backup "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-backup.sh"
+wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu.sh"
+wget -q -O /usr/bin/webmin "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/webmin.sh"
+wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/xp.sh"
+wget -q -O /usr/bin/update "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/update.sh"
+#wget -q -O /usr/bin/menu-theme "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-theme.sh"
+wget -q -O /usr/bin/info "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/info.sh"
+wget -q -O /usr/bin/infoserv "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/infoserv.sh"
+wget -q -O /usr/bin/menu-set "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/menu/menu-set.sh"
+wget -q -O /usr/bin/about "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/options/about.sh"
 chmod +x /usr/bin/add-ws
 chmod +x /usr/bin/add-ssws
 chmod +x /usr/bin/add-vless
@@ -192,7 +192,7 @@ echo -e "│                 PROSES UPDATE                   │" | lolcat
 echo -e "└─────────────────────────────────────────────────┘" | lolcat
 echo -e "\e[0;32mDownloaded successfully!\e[0m"
 echo ""
-ver=$( curl https://raw.githubusercontent.com/${GitUser}/v6/main/version )
+ver=$( curl https://raw.githubusercontent.com/${GitUser}/cyberboy-tech-v6/refs/heads/main/version )
 sleep 1
 clear
 echo -e ""

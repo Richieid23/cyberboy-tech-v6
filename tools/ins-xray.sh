@@ -33,15 +33,15 @@ BURIQ () {
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
-    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
-    d1=(`date -d "$exp" +%s`)
-    d2=(`date -d "$biji" +%s`)
-    exp2=$(( (d1 - d2) / 86400 ))
-    if [[ "$exp2" -le "0" ]]; then
-    echo $user > /etc/.$user.ini
-    else
-    rm -f /etc/.$user.ini > /dev/null 2>&1
-    fi
+      exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+      d1=(`date -d "$exp" +%s`)
+      d2=(`date -d "$biji" +%s`)
+      exp2=$(( (d1 - d2) / 86400 ))
+      if [[ "$exp2" -le "0" ]]; then
+        echo $user > /etc/.$user.ini
+      else
+        rm -f /etc/.$user.ini > /dev/null 2>&1
+      fi
     done
     rm -f /root/tmp
 }
@@ -52,42 +52,42 @@ echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
 Bloman () {
-if [ -f "/etc/.$Name.ini" ]; then
-CekTwo=$(cat /etc/.$Name.ini)
+  if [ -f "/etc/.$Name.ini" ]; then
+  CekTwo=$(cat /etc/.$Name.ini)
     if [ "$CekOne" = "$CekTwo" ]; then
-        res="Expired"
+      res="Expired"
     fi
-else
-res="Permission Accepted..."
-fi
+  else
+    res="Permission Accepted..."
+  fi
 }
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
     IZIN=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
-    Bloman
+      Bloman
     else
-    res="Permission Denied!"
+      res="Permission Denied!"
     fi
     BURIQ
 }
 PERMISSION
 if [ -f /home/needupdate ]; then
-red "Your script need to update first !"
-exit 0
+  red "Your script need to update first !"
+  exit 0
 elif [ "$res" = "Permission Accepted..." ]; then
-echo -ne
+  echo -ne
 else
-red "Permission Denied!"
-exit 0
+  red "Permission Denied!"
+  exit 0
 fi
 clear
 source /var/lib/scrz-prem/ipvps.conf
 if [[ "$IP" = "" ]]; then
-domain=$(cat /etc/xray/domain)
+  domain=$(cat /etc/xray/domain)
 else
-domain=$IP
+  domain=$IP
 fi
 
 echo -e "[ ${GREEN}INFO${NC} ] Checking... "
@@ -110,18 +110,18 @@ timedatectl set-timezone Asia/Jakarta
 apt install curl pwgen openssl netcat cron -y
 
 # Make Folder & Log XRay & Log Trojan
-    print_install "Membuat direktori xray"
-    mkdir -p /etc/{xray,vmess,websocket,vless,trojan,shadowsocks}
-    # mkdir -p /usr/sbin/xray/
-    mkdir -p /var/www/html/
-    mkdir -p /etc/geostore/
-#    chmod +x /var/log/xray
-    touch /etc/vmess/.vmess.db
-    touch /etc/vless/.vless.db
-    touch /etc/trojan/.trojan.db
-    touch /etc/ssh/.ssh.db
-    touch /etc/shadowsocks/.shadowsocks.db
-    clear
+print_install "Membuat direktori xray"
+mkdir -p /etc/{xray,vmess,websocket,vless,trojan,shadowsocks}
+# mkdir -p /usr/sbin/xray/
+mkdir -p /var/www/html/
+mkdir -p /etc/geostore/
+# chmod +x /var/log/xray
+touch /etc/vmess/.vmess.db
+touch /etc/vless/.vless.db
+touch /etc/trojan/.trojan.db
+touch /etc/ssh/.ssh.db
+touch /etc/shadowsocks/.shadowsocks.db
+clear
 rm -fr /var/log/xray
 #rm -fr /var/log/trojan
 rm -fr /home/vps/public_html
@@ -150,37 +150,37 @@ echo "" > /root/log-reboot.txt
 
 # nginx for debian & ubuntu
 install_ssl(){
-    if [ -f "/usr/bin/apt-get" ];then
-            isDebian=`cat /etc/issue|grep Debian`
-            if [ "$isDebian" != "" ];then
-                    apt-get install -y nginx certbot
-                    apt install -y nginx certbot
-                    sleep 3s
-            else
-                    apt-get install -y nginx certbot
-                    apt install -y nginx certbot
-                    sleep 3s
-            fi
+  if [ -f "/usr/bin/apt-get" ];then
+    isDebian=`cat /etc/issue|grep Debian`
+    if [ "$isDebian" != "" ];then
+      apt-get install -y nginx certbot
+      apt install -y nginx certbot
+      sleep 3s
     else
-        yum install -y nginx certbot
-        sleep 3s
+      apt-get install -y nginx certbot
+      apt install -y nginx certbot
+      sleep 3s
     fi
+  else
+    yum install -y nginx certbot
+    sleep 3s
+  fi
 
-    systemctl stop nginx.service
+  systemctl stop nginx.service
 
-    if [ -f "/usr/bin/apt-get" ];then
-            isDebian=`cat /etc/issue|grep Debian`
-            if [ "$isDebian" != "" ];then
-                    echo "A" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
-                    sleep 3s
-            else
-                    echo "A" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
-                    sleep 3s
-            fi
+  if [ -f "/usr/bin/apt-get" ];then
+    isDebian=`cat /etc/issue|grep Debian`
+    if [ "$isDebian" != "" ];then
+      echo "A" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
+      sleep 3s
     else
-        echo "Y" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
-        sleep 3s
+      echo "A" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
+      sleep 3s
     fi
+  else
+    echo "Y" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
+    sleep 3s
+  fi
 }
 
 # install nginx
@@ -188,9 +188,9 @@ apt install -y nginx
 cd
 rm -fr /etc/nginx/sites-enabled/default
 rm -fr /etc/nginx/sites-available/default
-wget -q -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/AngIMAN/v6/main/tools/nginx.conf" 
+wget -q -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/nginx.conf" 
 #mkdir -p /home/vps/public_html
-wget -q -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/AngIMAN/v6/main/tools/vps.conf"
+wget -q -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Richieid23/cyberboy-tech-v6/refs/heads/main/tools/vps.conf"
 
 # Install Xray #
 #==========#

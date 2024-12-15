@@ -1,5 +1,5 @@
 #!/bin/bash
-# SCRIPT BY Effata
+# SCRIPT BY Cyberboy
 
 BIBlack='\033[1;90m'      # Black
 BIRed='\033[1;91m'        # Red

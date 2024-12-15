@@ -49,58 +49,58 @@ export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
 
 BURIQ () {
-    curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist> /root/tmp
+    curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
-    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
-    d1=(`date -d "$exp" +%s`)
-    d2=(`date -d "$biji" +%s`)
-    exp2=$(( (d1 - d2) / 86400 ))
-    if [[ "$exp2" -le "0" ]]; then
-    echo $user > /etc/.$user.ini
-    else
-    rm -f /etc/.$user.ini > /dev/null 2>&1
-    fi
+        exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+        d1=(`date -d "$exp" +%s`)
+        d2=(`date -d "$biji" +%s`)
+        exp2=$(( (d1 - d2) / 86400 ))
+        if [[ "$exp2" -le "0" ]]; then
+            echo $user > /etc/.$user.ini
+        else
+            rm -f /etc/.$user.ini > /dev/null 2>&1
+        fi
     done
     rm -f /root/tmp
 }
 
 MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist| grep $MYIP | awk '{print $2}')
+Name=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist | grep $MYIP | awk '{print $2}')
 echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
 Bloman () {
-if [ -f "/etc/.$Name.ini" ]; then
-CekTwo=$(cat /etc/.$Name.ini)
-    if [ "$CekOne" = "$CekTwo" ]; then
-        res="Expired"
+    if [ -f "/etc/.$Name.ini" ]; then
+    CekTwo=$(cat /etc/.$Name.ini)
+        if [ "$CekOne" = "$CekTwo" ]; then
+            res="Expired"
+        fi
+    else
+        res="Permission Accepted..."
     fi
-else
-res="Permission Accepted..."
-fi
 }
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist| awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
-    Bloman
+        Bloman
     else
-    res="Permission Denied!"
+        res="Permission Denied!"
     fi
     BURIQ
 }
 PERMISSION
 if [ -f /home/needupdate ]; then
-red "Your script need to update first !"
-exit 0
+    red "Your script need to update first !"
+    exit 0
 elif [ "$res" = "Permission Accepted..." ]; then
-echo -ne
+    echo -ne
 else
-red "Permission Denied!"
-exit 0
+    red "Permission Denied!"
+    exit 0
 fi
 clear
 
@@ -171,7 +171,7 @@ echo -e "Link gRPC      : ${vlesslink3}"
 echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 echo -e "┌─────────────────────────────────────────────────┐" | lolcat
-echo -e "│               ILHAM STORE               │" | lolcat
+echo -e "│               AMAQ NAJWA STORE               │" | lolcat
 echo -e "└─────────────────────────────────────────────────┘" | lolcat
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
@@ -216,7 +216,7 @@ echo -e "Expired On     : $exp"
 echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 echo -e "┌─────────────────────────────────────────────────┐" | lolcat
-echo -e "│               ILHAM STORE               │" | lolcat
+echo -e "│                AMAQ NAJWA STORE                 │" | lolcat
 echo -e "└─────────────────────────────────────────────────┘" | lolcat
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
@@ -264,7 +264,7 @@ rm -rf /tmp/other.txt
 
 echo ""
 echo -e "┌─────────────────────────────────────────────────┐" | lolcat
-echo -e "│               ILHAM STORE               │" | lolcat
+echo -e "│                AMAQ NAJWA STORE                 │" | lolcat
 echo -e "└─────────────────────────────────────────────────┘" | lolcat
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
@@ -321,7 +321,7 @@ echo -e "└──────────────────────�
     echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
 echo -e "┌─────────────────────────────────────────────────┐" | lolcat
-echo -e "│               ILHAM STORE               │" | lolcat
+echo -e "│                AMAQ NAJWA STORE                 │" | lolcat
 echo -e "└─────────────────────────────────────────────────┘" | lolcat
 echo ""
     read -n 1 -s -r -p "Press any key to back on menu"
@@ -369,7 +369,7 @@ echo -e "└──────────────────────�
     echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
 echo -e "┌─────────────────────────────────────────────────┐" | lolcat
-echo -e "│               ILHAM STORE               │" | lolcat
+echo -e "│                AMAQ NAJWA STORE                 │" | lolcat
 echo -e "└─────────────────────────────────────────────────┘" | lolcat
 echo ""
     read -n 1 -s -r -p "Press any key to back on menu"

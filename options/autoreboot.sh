@@ -45,58 +45,58 @@ export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
 
 BURIQ () {
-    curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist> /root/tmp
+    curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
-    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
-    d1=(`date -d "$exp" +%s`)
-    d2=(`date -d "$biji" +%s`)
-    exp2=$(( (d1 - d2) / 86400 ))
-    if [[ "$exp2" -le "0" ]]; then
-    echo $user > /etc/.$user.ini
-    else
-    rm -f /etc/.$user.ini > /dev/null 2>&1
-    fi
+        exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+        d1=(`date -d "$exp" +%s`)
+        d2=(`date -d "$biji" +%s`)
+        exp2=$(( (d1 - d2) / 86400 ))
+        if [[ "$exp2" -le "0" ]]; then
+            echo $user > /etc/.$user.ini
+        else
+            rm -f /etc/.$user.ini > /dev/null 2>&1
+        fi
     done
     rm -f /root/tmp
 }
 
 MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist| grep $MYIP | awk '{print $2}')
+Name=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist | grep $MYIP | awk '{print $2}')
 echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
 Bloman () {
-if [ -f "/etc/.$Name.ini" ]; then
-CekTwo=$(cat /etc/.$Name.ini)
-    if [ "$CekOne" = "$CekTwo" ]; then
-        res="Expired"
+    if [ -f "/etc/.$Name.ini" ]; then
+    CekTwo=$(cat /etc/.$Name.ini)
+        if [ "$CekOne" = "$CekTwo" ]; then
+            res="Expired"
+        fi
+    else
+        res="Permission Accepted..."
     fi
-else
-res="Permission Accepted..."
-fi
 }
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist| awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/Richieid23/cyberboy-tech/refs/heads/main/Regist | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
-    Bloman
+        Bloman
     else
-    res="Permission Denied!"
+        res="Permission Denied!"
     fi
     BURIQ
 }
 PERMISSION
 if [ -f /home/needupdate ]; then
-red "Your script need to update first !"
-exit 0
+    red "Your script need to update first !"
+    exit 0
 elif [ "$res" = "Permission Accepted..." ]; then
-echo -ne
+    echo -ne
 else
-red "Permission Denied!"
-exit 0
+    red "Permission Denied!"
+    exit 0
 fi
 
 red='\e[1;31m'
@@ -106,12 +106,12 @@ MYIP=$(wget -qO- icanhazip.com);
 echo "Checking VPS"
 clear
 if [ ! -e /usr/bin/reboot ]; then
-echo '#!/bin/bash' > /usr/bin/reboot
-echo 'tanggal=$(date +"%m-%d-%Y")' >> /usr/bin/reboot
-echo 'waktu=$(date +"%T")' >> /usr/bin/reboot
-echo 'echo "Server successfully rebooted on the date of $tanggal hit $waktu." >> /root/log-reboot.txt' >> /usr/bin/reboot
-echo '/sbin/shutdown -r now' >> /usr/bin/reboot
-chmod +x /usr/bin/reboot
+    echo '#!/bin/bash' > /usr/bin/reboot
+    echo 'tanggal=$(date +"%m-%d-%Y")' >> /usr/bin/reboot
+    echo 'waktu=$(date +"%T")' >> /usr/bin/reboot
+    echo 'echo "Server successfully rebooted on the date of $tanggal hit $waktu." >> /root/log-reboot.txt' >> /usr/bin/reboot
+    echo '/sbin/shutdown -r now' >> /usr/bin/reboot
+    chmod +x /usr/bin/reboot
 fi
 
 echo -e ""
@@ -134,104 +134,104 @@ read -p "     Please Input Number  [1-7 or x] :  "  autoreboot
 echo -e ""
 case $autoreboot in
 1)
-echo "*/30 * * * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
-echo "" > /root/log-reboot.txt
-echo -e ""
-echo -e "======================================"
-echo -e ""
-echo -e "      AutoReboot : On"
-echo -e "      AutoReboot Every : 30 Minutes"
-echo -e ""
-echo -e "======================================"
-service cron reload >/dev/null 2>&1
-service cron restart >/dev/null 2>&1
-;;
+    echo "*/30 * * * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
+    echo "" > /root/log-reboot.txt
+    echo -e ""
+    echo -e "======================================"
+    echo -e ""
+    echo -e "      AutoReboot : On"
+    echo -e "      AutoReboot Every : 30 Minutes"
+    echo -e ""
+    echo -e "======================================"
+    service cron reload >/dev/null 2>&1
+    service cron restart >/dev/null 2>&1
+    ;;
 2)
-echo "0 * * * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
-echo "" > /root/log-reboot.txt
-echo -e ""
-echo -e "======================================"
-echo -e ""
-echo -e "      AutoReboot : On"
-echo -e "      AutoReboot Every : 1 Hours"
-echo -e ""
-echo -e "======================================"
-service cron reload >/dev/null 2>&1
-service cron restart >/dev/null 2>&1
-;;
+    echo "0 * * * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
+    echo "" > /root/log-reboot.txt
+    echo -e ""
+    echo -e "======================================"
+    echo -e ""
+    echo -e "      AutoReboot : On"
+    echo -e "      AutoReboot Every : 1 Hours"
+    echo -e ""
+    echo -e "======================================"
+    service cron reload >/dev/null 2>&1
+    service cron restart >/dev/null 2>&1
+    ;;
 3)
-echo "0 */12 * * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
-echo "" > /root/log-reboot.txt
-echo -e ""
-echo -e "======================================"
-echo -e ""
-echo -e "      AutoReboot : On"
-echo -e "      AutoReboot Every : 12 Hours"
-echo -e ""
-echo -e "======================================"
-service cron reload >/dev/null 2>&1
-service cron restart >/dev/null 2>&1
-;;
+    echo "0 */12 * * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
+    echo "" > /root/log-reboot.txt
+    echo -e ""
+    echo -e "======================================"
+    echo -e ""
+    echo -e "      AutoReboot : On"
+    echo -e "      AutoReboot Every : 12 Hours"
+    echo -e ""
+    echo -e "======================================"
+    service cron reload >/dev/null 2>&1
+    service cron restart >/dev/null 2>&1
+    ;;
 4)
-echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
-echo "" > /root/log-reboot.txt
-echo -e ""
-echo -e "======================================"
-echo -e ""
-echo -e "      AutoReboot : On"
-echo -e "      AutoReboot Every : 24 Hours"
-echo -e ""
-echo -e "======================================"
-service cron reload >/dev/null 2>&1
-service cron restart >/dev/null 2>&1
-;;
+    echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
+    echo "" > /root/log-reboot.txt
+    echo -e ""
+    echo -e "======================================"
+    echo -e ""
+    echo -e "      AutoReboot : On"
+    echo -e "      AutoReboot Every : 24 Hours"
+    echo -e ""
+    echo -e "======================================"
+    service cron reload >/dev/null 2>&1
+    service cron restart >/dev/null 2>&1
+    ;;
 5)
-echo "0 0 */7 * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
-echo "" > /root/log-reboot.txt
-echo -e ""
-echo -e "======================================"
-echo -e ""
-echo -e "      AutoReboot : On"
-echo -e "      AutoReboot Every : 1 Weeks"
-echo -e ""
-echo -e "======================================"
-service cron reload >/dev/null 2>&1
-service cron restart >/dev/null 2>&1
-;;
+    echo "0 0 */7 * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
+    echo "" > /root/log-reboot.txt
+    echo -e ""
+    echo -e "======================================"
+    echo -e ""
+    echo -e "      AutoReboot : On"
+    echo -e "      AutoReboot Every : 1 Weeks"
+    echo -e ""
+    echo -e "======================================"
+    service cron reload >/dev/null 2>&1
+    service cron restart >/dev/null 2>&1
+    ;;
 6)
-echo "0 0 1 * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
-echo "" > /root/log-reboot.txt
-echo -e ""
-echo -e "======================================"
-echo -e ""
-echo -e "      AutoReboot : On"
-echo -e "      AutoReboot Every : 1 Mount"
-echo -e ""
-echo -e "======================================"
-service cron reload >/dev/null 2>&1
-service cron restart >/dev/null 2>&1
-;;
+    echo "0 0 1 * * root /usr/bin/reboot" > /etc/cron.d/auto_reboot && chmod +x /etc/cron.d/auto_reboot
+    echo "" > /root/log-reboot.txt
+    echo -e ""
+    echo -e "======================================"
+    echo -e ""
+    echo -e "      AutoReboot : On"
+    echo -e "      AutoReboot Every : 1 Mount"
+    echo -e ""
+    echo -e "======================================"
+    service cron reload >/dev/null 2>&1
+    service cron restart >/dev/null 2>&1
+    ;;
 7)
-rm -fr /etc/cron.d/auto_reboot
-echo "" > /root/log-reboot.txt
-echo -e ""
-echo -e "======================================"
-echo -e ""
-echo -e "      AutoReboot Turned Off"
-echo -e ""
-echo -e "======================================"
-service cron reload >/dev/null 2>&1
-service cron restart >/dev/null 2>&1
-;;
+    rm -fr /etc/cron.d/auto_reboot
+    echo "" > /root/log-reboot.txt
+    echo -e ""
+    echo -e "======================================"
+    echo -e ""
+    echo -e "      AutoReboot Turned Off"
+    echo -e ""
+    echo -e "======================================"
+    service cron reload >/dev/null 2>&1
+    service cron restart >/dev/null 2>&1
+    ;;
 0)
-menu
-;;
+    menu
+    ;;
 x)
-exit
-;;
+    exit
+    ;;
 *)
-echo "Please enter an correct number"
-;;
+    echo "Please enter an correct number"
+    ;;
 esac
 read -n 1 -s -r -p "Press any key to back on menu"
 
