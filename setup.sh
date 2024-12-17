@@ -2,10 +2,7 @@
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 # BOT INFORMATION
 date=$(date -R | cut -d " " -f -5)
-export CHATID="1793095437"
-export KEY="5996149634:AAG1tGt9nn7ipxGGXQuwmPaMKuv0DqttB6k"
 export TIME="10"
-export URL="https://api.telegram.org/bot$KEY/sendMessage"
 IP=$(wget -qO- ipinfo.io/ip);
 domain=$(cat /etc/xray/domain)
 date=$(date +"%Y-%m-%d")
@@ -121,7 +118,7 @@ if [[ "$hst" != "$dart" ]]; then
 fi
 mkdir -p /etc/xray
 
-echo -e "${tyblue} Welcome To Script Premium Vpn Express${NC} "
+echo -e "${tyblue} Welcome To Script Premium Vpn Amaq Damar Express${NC} "
 sleep 2
 echo -e "[ ${green}INFO${NC} ] Mempersiapkan Instal File"
 apt install git curl -y >/dev/null 2>&1
